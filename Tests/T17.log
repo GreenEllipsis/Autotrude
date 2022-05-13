@@ -1,0 +1,106 @@
+2022-01-25 01:56:40,707 - Changing monitoring state from "Offline" to "Opening serial connection"
+2022-01-25 01:56:40,735 - Connecting to port /dev/ttyUSB0, baudrate 250000
+2022-01-25 01:56:40,972 - Changing monitoring state from "Opening serial connection" to "Connecting"
+2022-01-25 01:56:40,974 - Connected to: Serial<id=0x6dc9fff0, open=True>(port='/dev/ttyUSB0', baudrate=250000, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False), starting monitor
+2022-01-25 01:56:40,994 - Send: N0 M110 N0*125
+2022-01-25 01:56:41,025 - Recv: ok
+2022-01-25 01:56:41,029 - Send: N0 M110 N0*125
+2022-01-25 01:56:41,041 - Changing monitoring state from "Connecting" to "Operational"
+2022-01-25 01:56:41,098 - Recv: ok
+2022-01-25 01:56:41,102 - Send: N0 M110 N0*125
+2022-01-25 01:56:41,108 - Recv: ok
+2022-01-25 01:56:41,136 - Send: N1 M115*39
+2022-01-25 01:56:41,165 - Recv: FIRMWARE_NAME:Marlin bugfix-2.0.x (Jan 16 2022 21:40:34) SOURCE_CODE_URL:github.com/MarlinFirmware/Marlin PROTOCOL_VERSION:1.0 MACHINE_TYPE:Autotruder T1 EXTRUDER_COUNT:1 UUID:40e0f036-f878-4106-aed9-2856d4815d64
+2022-01-25 01:56:41,221 - 
+2022-01-25 01:56:41,222 - ---------------------------------------------------------------------------
+2022-01-25 01:56:41,222 - Your printer's firmware is a development build of Marlin (build date
+2022-01-25 01:56:41,222 - 20220116). It might be more unstable than a release version and should be
+2022-01-25 01:56:41,222 - kept up-to-date.
+2022-01-25 01:56:41,222 - 
+2022-01-25 01:56:41,223 - Learn more at https://faq.octoprint.org/warning-firmware-development
+2022-01-25 01:56:41,223 - ---------------------------------------------------------------------------
+2022-01-25 01:56:41,223 - 
+2022-01-25 01:56:41,223 - 
+2022-01-25 01:56:41,229 - Recv: Cap:SERIAL_XON_XOFF:0
+2022-01-25 01:56:41,241 - Recv: Cap:BINARY_FILE_TRANSFER:0
+2022-01-25 01:56:41,244 - Recv: Cap:EEPROM:1
+2022-01-25 01:56:41,286 - Recv: Cap:VOLUMETRIC:1
+2022-01-25 01:56:41,312 - Recv: Cap:AUTOREPORT_POS:0
+2022-01-25 01:56:41,329 - Recv: Cap:AUTOREPORT_TEMP:1
+2022-01-25 01:56:41,341 - Recv: Cap:PROGRESS:0
+2022-01-25 01:56:41,388 - Recv: Cap:PRINT_JOB:1
+2022-01-25 01:56:41,440 - Recv: Cap:AUTOLEVEL:0
+2022-01-25 01:56:41,444 - Recv: Cap:RUNOUT:0
+2022-01-25 01:56:41,450 - Recv: Cap:Z_PROBE:0
+2022-01-25 01:56:41,468 - Recv: Cap:LEVELING_DATA:0
+2022-01-25 01:56:41,486 - Recv: Cap:BUILD_PERCENT:0
+2022-01-25 01:56:41,539 - Recv: Cap:SOFTWARE_POWER:0
+2022-01-25 01:56:41,543 - Recv: Cap:TOGGLE_LIGHTS:0
+2022-01-25 01:56:41,575 - Recv: Cap:CASE_LIGHT_BRIGHTNESS:0
+2022-01-25 01:56:41,580 - Recv: Cap:EMERGENCY_PARSER:0
+2022-01-25 01:56:41,590 - Recv: Cap:HOST_ACTION_COMMANDS:0
+2022-01-25 01:56:41,641 - 
+2022-01-25 01:56:41,663 - ---------------------------------------------------------------------------
+2022-01-25 01:56:41,680 - Your printer's firmware supports host action commands, but they are
+2022-01-25 01:56:41,696 - disabled. The firmware will not inform OctoPrint about job pause &
+2022-01-25 01:56:41,727 - cancellations, filament runouts, and similar firmware-side events. If you
+2022-01-25 01:56:41,772 - want this functionality, you need to change your firmware's configuration.
+2022-01-25 01:56:41,794 - 
+2022-01-25 01:56:41,829 - Learn more at https://faq.octoprint.org/warning-firmware-hostcommands
+2022-01-25 01:56:41,856 - ---------------------------------------------------------------------------
+2022-01-25 01:56:41,856 - 
+2022-01-25 01:56:41,856 - 
+2022-01-25 01:56:41,857 - Recv: Cap:PROMPT_SUPPORT:0
+2022-01-25 01:56:41,859 - Recv: Cap:SDCARD:1
+2022-01-25 01:56:41,861 - Recv: Cap:REPEAT:0
+2022-01-25 01:56:41,872 - Recv: Cap:SD_WRITE:1
+2022-01-25 01:56:41,874 - Recv: Cap:AUTOREPORT_SD_STATUS:0
+2022-01-25 01:56:41,876 - Recv: Cap:LONG_FILENAME:1
+2022-01-25 01:56:41,903 - Recv: Cap:EXTENDED_M20:1
+2022-01-25 01:56:41,905 - Recv: Cap:THERMAL_PROTECTION:1
+2022-01-25 01:56:41,930 - Recv: Cap:MOTION_MODES:0
+2022-01-25 01:56:41,941 - Recv: Cap:ARCS:1
+2022-01-25 01:56:41,966 - Recv: Cap:BABYSTEPPING:0
+2022-01-25 01:56:41,981 - Recv: Cap:CHAMBER_TEMPERATURE:0
+2022-01-25 01:56:42,013 - Recv: Cap:COOLER_TEMPERATURE:0
+2022-01-25 01:56:42,058 - Recv: Cap:MEATPACK:0
+2022-01-25 01:56:42,093 - Recv: Cap:CONFIG_EXPORT:0
+2022-01-25 01:56:42,116 - Recv: ok
+2022-01-25 01:56:42,144 - Send: M21
+2022-01-25 01:56:42,182 - Recv: echo:No SD card
+2022-01-25 01:56:42,183 - Recv: ok
+2022-01-25 01:56:42,189 - Send: M155 S2
+2022-01-25 01:56:42,215 - Recv: ok
+2022-01-25 01:56:44,224 - Recv:  T:19.22 /0.00 @:0
+2022-01-25 01:56:46,215 - Recv:  T:19.88 /0.00 @:0
+2022-01-25 01:56:48,197 - Recv:  T:19.49 /0.00 @:0
+2022-01-25 01:56:50,211 - Recv:  T:19.10 /0.00 @:0
+2022-01-25 01:56:52,214 - Recv:  T:19.65 /0.00 @:0
+2022-01-25 01:56:54,213 - Recv:  T:18.87 /0.00 @:0
+2022-01-25 01:56:56,214 - Recv:  T:19.34 /0.00 @:0
+2022-01-25 01:56:58,189 - Recv:  T:20.08 /0.00 @:0
+2022-01-25 01:57:00,188 - Recv:  T:18.91 /0.00 @:0
+2022-01-25 01:57:02,191 - Recv:  T:18.98 /0.00 @:0
+2022-01-25 01:57:06,023 - Recv:  T:19.77 /0.00 @:0
+2022-01-25 01:57:06,189 - Recv:  T:19.69 /0.00 @:0
+2022-01-25 01:57:08,189 - Recv:  T:20.12 /0.00 @:0
+2022-01-25 01:57:10,192 - Recv:  T:19.14 /0.00 @:0
+2022-01-25 01:57:12,195 - Recv:  T:18.91 /207.00 @:127
+2022-01-25 01:57:14,211 - Recv:  T:19.88 /207.00 @:127
+2022-01-25 01:57:16,190 - Recv:  T:21.09 /207.00 @:127
+2022-01-25 01:57:18,196 - Recv:  T:23.91 /207.00 @:127
+2022-01-25 01:57:20,234 - Recv:  T:27.73 /207.00 @:127
+2022-01-25 01:57:22,209 - Recv:  T:32.21 /207.00 @:127
+2022-01-25 01:57:24,189 - Recv:  T:36.77 /207.00 @:127
+2022-01-25 01:57:26,213 - Recv:  T:41.53 /207.00 @:127
+2022-01-25 01:57:28,185 - Recv:  T:46.73 /207.00 @:127
+2022-01-25 01:57:30,197 - Recv:  T:52.17 /207.00 @:127
+2022-01-25 01:57:32,184 - Recv:  T:57.46 /207.00 @:127
+2022-01-25 01:57:34,183 - Recv:  T:62.77 /207.00 @:127
+2022-01-25 01:57:36,182 - Recv:  T:68.24 /207.00 @:127
+2022-01-25 01:57:38,181 - Recv:  T:73.25 /207.00 @:127
+2022-01-25 01:57:40,181 - Recv:  T:78.56 /207.00 @:127
+2022-01-25 01:57:42,180 - Recv:  T:83.19 /207.00 @:127
+2022-01-25 01:57:44,180 - Recv:  T:88.38 /207.00 @:127
+2022-01-25 01:57:46,179 - Recv:  T:93.06 /207.00 @:127
+2022-01-25 01:57:48,179 - Recv:  T:97.75 /207.00 @:127

@@ -1,0 +1,85 @@
+(1032tap)
+(Machine)
+(  vendor: Nikodem Bartnik)
+(  model: Generic 3-axis Router)
+(  description: This machine has XYZ axis on the Head)
+(T1  D=2.5 CR=0 TAPER=118deg - ZMIN=-1.251 - drill)
+G90 G94
+G17
+G21
+
+(Drill3)
+T1
+S5000 M3
+G54
+G0 X5.5 Y5
+Z13.7
+Z10.7
+Z9.7
+G1 Z7.5 F30
+G0 Z9.7
+Z9.5
+G1 Z6 F30
+G0 Z9.7
+Z8
+G1 Z4.5 F30
+G0 Z9.7
+Z6.5
+G1 Z3 F30
+G0 Z9.7
+Z5
+G1 Z1.5 F30
+G0 Z9.7
+Z3.5
+G1 Z0 F30
+G0 Z9.7
+Z2
+G1 Z-1.251 F30
+G0 Z10.7
+Y17
+Z9.7
+G1 Z7.5 F30
+G0 Z9.7
+Z9.5
+G1 Z6 F30
+G0 Z9.7
+Z8
+G1 Z4.5 F30
+G0 Z9.7
+Z6.5
+G1 Z3 F30
+G0 Z9.7
+Z5
+G1 Z1.5 F30
+G0 Z9.7
+Z3.5
+G1 Z0 F30
+G0 Z9.7
+Z2
+G1 Z-1.251 F30
+G0 Z10.7
+X21.5
+Z9.7
+G1 Z7.5 F30
+G0 Z9.7
+Z9.5
+G1 Z6 F30
+G0 Z9.7
+Z8
+G1 Z4.5 F30
+G0 Z9.7
+Z6.5
+G1 Z3 F30
+G0 Z9.7
+Z5
+G1 Z1.5 F30
+G0 Z9.7
+Z3.5
+G1 Z0 F30
+G0 Z9.7
+Z2
+G1 Z-1.251 F30
+G0 Z10.7
+Z13.7
+M5
+M30
