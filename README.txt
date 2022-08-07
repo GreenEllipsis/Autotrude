@@ -1,1 +1,1 @@
-This folder is deprecated in favor of Autotrude on Wikifactory
+This folder is no longer deprecated in favor of Autotrude on Wikifactory
