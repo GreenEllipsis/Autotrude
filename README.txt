@@ -1,1 +1,1 @@
-This folder is no longer deprecated in favor of Autotrude on Wikifactory
+# Autotrude - making an automated PET bottle pultruder
