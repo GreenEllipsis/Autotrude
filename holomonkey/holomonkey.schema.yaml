@@ -1,0 +1,354 @@
+@YAML 1.2
+# Holomonkey
+# Buildable solutions from infinite configurations
+
+# There is no distinction between class and object. Any entity can be a member of another entity via creation using instance_of
+# Names are global. Global names must be unique
+# Build a parent-child hierarchy while parsing?
+# Single pass executable?
+
+--- !<tag:greenellipsis.org,2022:item>
+ID: integer # UUID?
+name: string
+property:
+ origin: [x, y, z]
+  rotation: [x, y, z]
+  length: string
+  quantity: float
+# scalar measurement, default mm
+# holomonkey coordinate system
+# first direction of extrusion is length: x-axis. second is width, y-axis, third is height: z-axis. 
+# The reason is for simplist natural language interpretation. The typle [a, b, c] has a length of a, width of a and height of c. 
+# Coordinate system is right-hand cartesian.
+# By convention, parts have their origin at the leftmost, bottommost, frontmost point, so the the part lies entirely in positive space
+# Following this pattern, the FreeCAD model should typically sketch on the y-z plane and extrude in the x.
+# Example item
+
+--- !<tag:greenellipsis.org,2022:item>
+ID: a8d5fd78-e3c6-43f3-a11a-3a6cfa8f29fdf
+name: tee_2020
+model: tee_2020.freecad_sketch
+interface: slot # means the placement of the interfacing entity is unconstrained along one line segment, defined by the line between the start and end points of the entity that references it, and the position of the entity is defined from the distance from the start_point. [define slot in YAML?]
+- interfaces_with:
+- - name:t_nut_M3
+- - name:t_nut_M4
+- - name:t_nut_M5
+
+# Functional parts and allocation for "Rescue 2"
+name: frame
+type: function # not convinced we need a "function" type. I envision these used as the placeholders in the UI when they are doing the design.
+usefulness: mandatory
+contains: 
+- name: left_frame_member
+- name: right_frame_member
+- name: front_frame_member
+- name: back_frame_member
+- name: corner
+
+name: hotend
+usefulness: mandatory
+contains:
+- name: thermistor
+- name: heater_cartridge
+- name: heater_block
+- name: hotend_mounting_bracket
+- name: nozzle
+
+name: puller
+usefulness: mandatory
+contains:
+- name: motor
+- name: linkage
+- name: motor_mount
+
+name: spool
+usefulness: recommended
+contains: 
+- name: spool_mount
+- name: spool_rod
+- name: spool
+
+name: controller
+usefulness: mandatory
+contains:
+- name: Arduino MEGA
+- name: motor_driver
+- name: 100uF capacitor
+- name: 100 kOhm resistor
+- name: 10 kOhm resistor
+- name: cooling_fan
+- name: firmware
+
+name: firmware
+usefulness: mandatory
+contains:
+- name: Marlin
+
+name: display
+usefulness: recommended
+contains: 
+- name: TFT Touchscreen LED? 2-line LCD? 4-line LCD
+note: get from Solar Stik?
+
+name: power supply
+usefulness: mandatory
+note: 
+
+name: bottle cutter
+usefuleness: mandatory
+contains:
+- rod
+- cutting bearings
+- bearing mounting fasteners
+- base
+- weight
+
+default_units:
+- distance: mm
+- angle: degrees
+
+name: end_holes
+type: operation
+# operations implicitly are applied to the part that references them
+operations:
+- drill: # creates a "hole" interface at [10,0,10] with a depth of width and a diameter of 5.1, and a similar, implicityly created interface at [10,40,10] because it was a through hole
+    start_point: [10.0, 0, 10] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 5.1 mm # clearance hole
+    #depth is not given, so assume through all?
+- drill:
+    start_point: [30.0, 0, 10] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 5.1 mm # clearance hole
+- drill:
+    start_point: [{length}-10.0, 10, 0] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 5.1 mm # clearance hole
+- drill:
+    start_point: [{length}-10.0, 10, 0] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 5.1 mm # clearance hole
+# counterbore
+- drill: # creates a "hole" interface at [10,0,10] with a depth of width and a diameter of 5.2, and a similar, implicityly created interface at [10,40,10] because it was a through hole
+    start_point: [10.0, 0, 10] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 8 mm?? # clearance hole
+    depth: 7 mm??
+- drill:
+    start_point: [30.0, 0, 10] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 8 mm?? # clearance hole
+    depth: 7 mm??
+- drill:
+    start_point: [{length}-10.0, 0, 10] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 8 mm?? # clearance hole
+    depth: 7 mm??
+- drill:
+    start_point: [{length}-30.0, 0, 10] mm
+    direction: [0, 1, 0] # drill direction is parallel to this unit vector
+    diameter: 8 mm?? # clearance hole
+    depth: 7 mm??
+    
+name: side_holes
+type: operation
+# operations implicitly are applied to the part that references them
+operations:
+- drill: # creates a "hole" interface {start_point} with a depth of 20 and a diameter of 5.2
+    start_point: [0.0, 10, 10] mm # relative to part
+    direction: [1, 0, 0] # drill direction is parallel to this vector
+    diameter: 4.7?? mm # pilot hole
+    depth: 20 mm
+- drill:
+    start_point: [0.0, 30, 10] mm # relative to part
+    direction: [1 mm, 0 deg, 0 deg] degrees # drill direction is parallel to this vector in spherical coordinates
+    diameter: 4.7?? mm # pilot hole
+    depth: 20 mm
+- drill:
+    start_point: [{length}, 10, 10] mm # relative to part
+    direction: [-1, 0, 0] # drill direction is parallel to this vector
+    diameter: 4.7?? mm # pilot hole
+    depth: 20 mm
+- drill:
+    start_point: [{length}, 30, 10] mm # relative to part
+    direction: [1 mm, 180 deg, 0 deg] degrees # drill direction is parallel to this vector in spherical coordinates
+    diameter: 4.7?? mm # pilot hole
+    depth: 20 mm
+- tap: # requires an existing hole interface at start_point. By default has same depth as hole
+    start_point: [0, 10, 10]
+    diameter: 5 mm
+    pitch: 0.8 mm
+- tap: # requires an existing hole interface at start_point. By default has same depth as hole
+    start_point: [0, 30, 10]
+    diameter: 5 mm
+    pitch: 0.8 mm
+- tap: # requires an existing hole interface at start_point. By default has same depth as hole
+    start_point: [{length}, 10, 10]
+    diameter: 5 mm
+    pitch: 0.8 mm
+- tap: # requires an existing hole interface at start_point. By default has same depth as hole
+    start_point: [{length}, 30, 10]
+    diameter: 5 mm
+    pitch: 0.8 mm
+    
+name: left_frame_member
+type: part # operations on "contains" results in part named left_frame_member
+contains: 
+  name: 4020_extrusion
+- length: 340 mm # the length before operations occur
+operations: # operations happen in the listed order
+- cut: # presumed cut perpendicular to length (based on yaml definition of 4020_extrusion? or of cut? or because it's only dimensional property is length? probably the latter.
+    start_point: 50 # assumed through yz plane
+    remainder_name: right_frame_member # inhereits all current properties of left_frame_member, but with a length of 340 - 80 - kerf mm.
+    kerf: 1 mm
+- side_holes
+
+# hierarchy is now
+# left_frame_member-+-4020_extrusion
+#                   |
+#                   +-right_frame_member---4020_extrusion
+
+name: right_frame_member # previously created by left_frame_member
+type: part
+operations:
+- cut:
+    start_point: 50
+    #remainder_name defaults to right_frame_member_cut_remainder?
+- side_holes  
+
+# hierarchy is now
+# left_frame_member-+-4020_extrusion
+#                   |
+#                   +-right_frame_member-+-4020_extrusion
+#                                        |
+#                                        +-right_frame_member_cut_remainder---4020_extrusion
+
+name: front_frame_member
+type: part
+length: 420 mm
+contains: 
+- name: 4020_extrusion
+operations:
+- side_holes
+
+name: back_frame_member
+type: part
+length: 420 mm
+contains: 
+- name: 4020_extrusion
+operations:
+- side_holes
+
+name: nozzle
+type: function
+usefulness: mandatory
+operations: 
+- drill:
+    diameter: 1.7 mm
+    start_point: [0, {width/2}, {height/2}]
+
+# fasteners will, by necessity, have at least two interfaces
+name: SHCS_M5x0.8-42 # up to 45 mm
+interfaces:
+- interface: M5x0.8_outside # has only an axial mate, leaving a degree of freedom
+    length: 25
+- interface: hole_plug # tempted to call it a negative hole. Has an axial mate and a surface mate
+    diameter: 5
+    start_point: [7??, 2.5??, 2.5??]
+    direction: [0, 1, 0] # orientation of the surface mate
+
+name: t_nut_2020_M4 # a part with 
+type: part
+model: t_nut_2020_M4.freecad 
+interfaces: 
+- interface: M4x0.6_inside # the idea is that there is enough information to create a mate in the CAD software, with the expected degree(s) of freedom
+    start_point: [0, 0, 0]
+    end_point: [0, 0, {height}] # undefined parameters (e.g. {height}) are implicitly extracted from like-named special parameters in the model
+interface: slot_2020
+- start_point: [{-length/2}, 0, 0]
+- end_point: [{length/2}, 0, 0]
+
+name: nut_M4x0.6
+type: interface
+interface_motion: thread # means interfacing entity is constrained to an axis and helical motion through the line segment defined by start_point and end_point with a pitch of {pitch}. Negative pitch implies left-hand thread (i.e. clockwise motion moves in negative direction)
+- interfaces_with:
+- - name:M4_SHCS
+- pitch: 0.6 mm
+
+name: slot_2020
+type: interface
+interface_motion: slot
+- interfaces_with:
+- - name:tee_2020
+
+name: nut_M6x1.0
+type: interface
+interface: nut
+- interfaces_with:
+- - name: screw_M6x1.0
+
+name: tap_M6x1.0
+type: operation
+interface_created: nut_M6x1.0
+
+name: 2020_Extrusion
+type: part
+property: 
+- length: 200 mm # {length} is pushed to a special parameter in the model. Specifically, the extrusion distance.
+- model: 2020_Extrusion.freecad # 2020_Extrusion.freecad is an indefinite length extrusion; holomonkey's FreeCAD driver knows to extrude it to "length". 
+
+- interface:
+- - name: slot_2020 # creates the interface from start_point to end_point
+- - start_point: [0, 0, 0]
+- - end_point: [{length}, 0, 0] # Since {length} is defined in the entitity, there's no need to extract it from the model.
+- operation: # legal operations to modify the part
+- - name: tap_M6x1.0
+
+name: front_frame_member
+instance_of: 2020_Extrusion # creates an entity with *inherits* all properties of the 2020_Extrusion.
+length: 200 mm # change the length to 200 mm
+
+operation: tap_M6x1.0 # creates a nut_M6x1.0 interface from start_point to end_point
+- start_point: [0, 0, 0]
+- end_point: [10, 0, 0]
+operation: tap_M6x1.0
+- start_point: [{length}, 0, 0]
+- end_point: [{length-10}, 0, 0]
+
+name: back_frame_member
+copy_of: front_frame_member # clones all properties of the given ID (except the ID) to create a new entity
+
+name: left_frame_member
+copy_of: front_frame_member # clones all properties of the given ID (except the ID) to create a new entity
+operation: cut # same effect as changing the length directly, except that it creates a remainder piece, and enables the UI to offer an option to modify the stock piece
+# this is a potentially very messy operation to implement. a) swarf must be removed b) interfaces must be severerd or assigned to the work piece or the remainder
+- length: 80 mm
+
+name: 2020 Extrusion
+property: 
+- length: 80 mm
+- model: 2020_Extrusion.freecad
+
+ID: 04
+copy_of: 03
+
+ID: 05
+name: 2020_bracket_90
+property:
+- model: 2020_bracket_90.freecad
+- 
+ID: 01
+name: frame
+property:
+- origin: [0, 0, 0]
+- rotation: [0, 0, 0]
+- contains: 
+- - ID: 68d5fd78-e3c6-43f3-a11a-3a6cfa8f29fdf
+- - - position: [-50, 0, 0]
+- - - rotation: [0, 0, 0]
+- - ID: 03
+- - - 
+- - ID: 02
+- - - position: [50, 0, 0]
+- - - rotation: [0, 0, 0]
+ 

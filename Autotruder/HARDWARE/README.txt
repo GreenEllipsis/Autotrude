@@ -1,0 +1,1 @@
+ideas for the hardware part of the Autotrude PET pultruder, including everything but software and firmware

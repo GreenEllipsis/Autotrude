@@ -1,0 +1,1 @@
+ideas for the pultruder hot end, including the heater block, thermistor, heater, nozzle, heatbreak and mount

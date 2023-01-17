@@ -1,0 +1,74 @@
+(1031face)
+(Machine)
+(  vendor: Nikodem Bartnik)
+(  model: Generic 3-axis Router)
+(  description: This machine has XYZ axis on the Head)
+(T1  D=3.175 CR=0 - ZMIN=9 - flat end mill)
+G90 G94
+G17
+G21
+(When using Fusion 360 for Personal Use, the feedrate of)
+(rapid moves is reduced to match the feedrate of cutting)
+(moves, which can increase machining time. Unrestricted rapid)
+(moves are available with a Fusion 360 Subscription.)
+
+(Face2)
+T1
+S5000 M3
+G54
+G0 X28.946 Y-0.618
+Z13.7
+G1 Z10.5 F50
+Z9.318 F20
+G18 G3 X28.628 Z9 I-0.317 K0
+G1 X28.597
+X-1.597 F50
+G17 G2 X-1.597 Y0.341 I0 J0.48
+G1 X28.597
+G3 X28.597 Y1.3 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y2.259 I0 J0.48
+G1 X28.597
+G3 X28.597 Y3.218 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y4.177 I0 J0.48
+G1 X28.597
+G3 X28.597 Y5.136 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y6.095 I0 J0.48
+G1 X28.597
+G3 X28.597 Y7.054 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y8.014 I0 J0.48
+G1 X28.597
+G3 X28.597 Y8.973 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y9.932 I0 J0.48
+G1 X28.597
+G3 X28.597 Y10.891 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y11.85 I0 J0.48
+G1 X28.597
+G3 X28.597 Y12.809 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y13.768 I0 J0.48
+G1 X28.597
+G3 X28.597 Y14.727 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y15.686 I0 J0.48
+G1 X28.597
+G3 X28.597 Y16.645 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y17.605 I0 J0.48
+G1 X28.597
+G3 X28.597 Y18.564 I0 J0.48
+G1 X-1.597
+G2 X-1.597 Y19.523 I0 J0.48
+G1 X28.597
+G3 X28.597 Y20.482 I0 J0.48
+G1 X-1.597
+G18 G3 X-1.915 Z9.318 I0 K0.318
+G1 Z13.7
+G17
+M5
+M30

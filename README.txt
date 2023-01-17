@@ -1,1 +1,1 @@
-This folder is no longer deprecated in favor of Autotrude on Wikifactory
+This is the Autotrude project, a usable PET pultruder.

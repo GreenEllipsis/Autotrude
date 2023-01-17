@@ -1,0 +1,1 @@
+Things created by other people, collected here for reference.
