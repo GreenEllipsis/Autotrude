@@ -1,6 +1,7 @@
 /*
 logo v1.1.0
-(C) 2023 Brian Alano
+(C) 2023 Brian Alano. All rights reserved.
+This is the Green Ellipsis logo. This work and any derivative works may not be reproduced in whole or in part without the express written permission of Brian Alano.
 # Minor changes
 added nozzle=true|false, bottle=true|false, arrows=true|false parameters to logo()
 */
