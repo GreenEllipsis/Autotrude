@@ -6,17 +6,31 @@ include <BOSL2/std.scad>
 include <BOSL2/extrusion_vslot.scad>
 include <BOSL2/power_supply.scad>
 
+/* [Model Selections] */
+frame_options = "F"; // [F:V-Slot 2020 Extrusion]
+power_supply_options = "P"; // [P:JOYLIT S-120-24]
+control_board_options = "C"; // [C:MKS Robin Nano V1.2]
+
+/* [Dimensions] */
 frame_length = 400;
 frame_width = 130;
-v_profile= 20;
 thick_plate_t = 5;
 thin_plate_t = 1.2;
 default_fillet = 2.5;
+
+/* [Hole Sizes] */
 M4_through_hole_d = 4.2;
 M3_through_hole_d = 3.2;
-ps_model = "JOYLIT S-120-24";
+
+/* [Hidden] */
+// options processing
+v_profile= frame_options == "F" ? 20 : 0;
+ps_model = power_supply_options == "P" ? "JOYLIT S-120-24" : "unsupported";
+
+// frame calculations
 cross_brace_length = frame_width - v_profile*2;
 vslot_distance =frame_width - v_profile;
+
 // power supply parameters
 ps = power_supply_model_params(ps_model);
 hole_center_s = ps[4][1][1][0] - ps[4][0][1][0];
@@ -107,13 +121,18 @@ module basic_mounting_plate(width=10, slot_length=90,slot_d=3, center, anchor, s
 //extrusion_vslot(profile=20, height=220, anchor=FRONT) ;
 
 frame()
-    // first power supply mounting bracket attached to frame
-    attach("front_right_bottom") recolor("YellowGreen") right(ps_hole_back_s) basic_mounting_plate(slot_length=hole_center_s+M3_through_hole_d, anchor="hole_front_bottom")
-    // power supply attached to first bracket
-    attach("slot_front_top") recolor("silver") power_supply_model(ps_model, spin=90 , anchor="hole3", orient=UP)
-    // second power supply mounting bracket attached to power supply
-    attach("hole0") recolor("YellowGreen") basic_mounting_plate(slot_length=hole_center_s, slot_d =M3_through_hole_d, anchor="slot_front_top", spin=90, orient=UP);
+// first power supply mounting bracket attached to frame
+attach("front_right_bottom") recolor("YellowGreen") right(ps_hole_back_s) basic_mounting_plate(slot_length=hole_center_s+M3_through_hole_d, anchor="hole_front_bottom")
+// power supply attached to first bracket
+attach("slot_front_top") recolor("silver") power_supply_model(ps_model, spin=90 , anchor="hole3", orient=UP)
+// second power supply mounting bracket attached to power supply
+attach("hole0") recolor("YellowGreen") basic_mounting_plate(slot_length=hole_center_s, slot_d =M3_through_hole_d, anchor="slot_front_top", spin=90, orient=UP);
 
+//Project Box dimensions
+// 89.6 x 130.2
+translate([-70, 40, -10]) rotate([180,0,-90]) import("23329BBA01 MKS Robin Nano V3 Project Box Base.stl");
+color("YellowGreen") translate([-70-131.2, 89.6-50, -34.5-10])
+rotate([0,0,-90]) translate([0, -145,0]) import("23329BBA02 MKS Robin Nano V3 Project Box Lid.stl");
 
 
 
