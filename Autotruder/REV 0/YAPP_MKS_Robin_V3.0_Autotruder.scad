@@ -75,8 +75,8 @@ lidPlaneThickness   = 1.25;
 //                       + basePlaneThickness
 //-- space between pcb and lidPlane :=
 //--      (bottonWallHeight+lidWallHeight) - (standoffHeight+pcbThickness)
-baseWallHeight      = 7.5;
-lidWallHeight       = 25;
+baseWallHeight      = 10;
+lidWallHeight       = 23;
 
 //-- ridge where base and lid off box can overlap
 //-- Make sure this isn't less than lidWallHeight
@@ -93,7 +93,7 @@ standoffDiameter    = 7;
 
 //-- D E B U G -----------------//-> Default ---------
 // false puts lid over base
-showSideBySide      = true; // [false,true];   
+showSideBySide      = false; // [false,true];   
 // space between base and lid
 onLidGap            = 0;
 // additional distance between base and lid when side by side
@@ -322,8 +322,11 @@ pcbZ = basePlaneThickness + standoffHeight + pcbThickness;
 
 cutoutsFront =  
 [
- [pcbY+21.75-0.5, pcbZ-0.5, 12+1, 12+1, 0 ,0 ,0, yappRectangle,yappOrigin],
+  // USB Type B
+ [pcbY+21.75-0.5, pcbZ-0.5, 11+1, 12+1, 0 ,0 ,0, yappRectangle,yappOrigin],
+ // USB TYpe A
  [pcbY+37.629-0.5, pcbZ-0.5, 5.72+1, 14+1, 0 ,0 ,0, yappRectangle,yappOrigin],
+ // microSD
  [pcbY+47.446-0.5, pcbZ-0.5, 14.85+1, 1.8+1, 0 ,0 ,0, yappRectangle,yappOrigin],
 ];
 
@@ -334,7 +337,7 @@ cutoutsBack =
 
 cutoutsLeft =   
 [
- [pcbX+8, pcbZ, pcbLength-8*2, lidWallHeight-2, 0 ,0 ,0, yappRectangle,yappOrigin],
+ [pcbX+8, pcbZ-0.5, pcbLength-8*2, lidWallHeight-2, 0 ,0 ,0, yappRectangle,yappOrigin],
 ];
 
 cutoutsRight =  

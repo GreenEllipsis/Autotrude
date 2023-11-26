@@ -2261,7 +2261,7 @@ module buildButtons()
 
       //-debug-echo("buildButtons()", i=i, extHeight=extHeight, xOff=xOff);
 
-      if (printSwitchExtenders && (showSideBySide || !$preview))
+      if (printSwitchExtenders && (showSideBySide) )
       {
         if (printMessages) echo ("Printing the switch extenders");
         if (isTrue(yappCircle, button))
@@ -3719,7 +3719,7 @@ module YAPPgenerate()
       if (printLidShell)
       {
         echo ("Print lid");
-       if (showSideBySide || !$preview)
+       if (showSideBySide)
         {
           echo ("Side by side");
           //-- lid side-by-side
