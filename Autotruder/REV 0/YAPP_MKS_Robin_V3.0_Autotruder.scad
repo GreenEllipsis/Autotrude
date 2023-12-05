@@ -49,8 +49,8 @@ previewQuality = 5;   // Default = 5
 renderQuality = 10;   // Default = 12
 
 //-- which part(s) do you want to print?
-printBaseShell        = true;
-printLidShell         = false;
+printBaseShell        = false;
+printLidShell         = true;
 printSwitchExtenders  = false;
 
 //-- pcb dimensions -- very important!!!

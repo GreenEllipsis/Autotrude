@@ -13,7 +13,7 @@ control_board_options = "C"; // [C:MKS Robin Nano V3.x]
 
 /* [Visibility] */
 //hide_tags ="23269BBA03 power_supply";
-hide_tags = "";
+hide_tags = "frame power_supply ";
 
 /* [Dimensions] */
 frame_length = 400;
@@ -25,6 +25,8 @@ default_fillet = 2.5;
 /* [Hole Sizes] */
 M4_through_hole_d = 4.2;
 M3_through_hole_d = 3.2;
+M4_tap_hole_d = 3.7;
+M4_head_d = 5.5; // FIXME
 
 /* [Hidden] */
 // options processing
@@ -74,16 +76,6 @@ module frame(anchor, spin, orient) {
     }
 }
 
-// power supply assembly
-//module power_supply() {
-//    ps = power_supply_model_params(ps_model);
-//    hole_center_s = ps[4][1][1][0] - ps[4][0][1][0];
-//    echo(hole_center_s= hole_center_s);
-//    recolor("silver") power_supply_model(ps_model, spin=90 , anchor=CENTER, orient=UP) {
-//        right(hole_center_s/2) position("hole0") recolor("YellowGreen") basic_mounting_plate(slot_length=hole_center_s+M3_through_hole_d, anchor=CENTER+TOP, spin=90);
-//        right(hole_center_s/2) position("hole2") recolor("YellowGreen") basic_mounting_plate(slot_length=hole_center_s, slot_d =M3_through_hole_d, anchor=CENTER+TOP, spin=90);
-//    }
-//}
 
 module basic_mounting_plate(width=10, slot_length=90,slot_d=3, text, center, anchor, spin=0, orient=UP) {
     slot_total_length = slot_length + slot_d;
@@ -102,10 +94,19 @@ module basic_mounting_plate(width=10, slot_length=90,slot_d=3, text, center, anc
         
     module shape() {
         difference() {
-            // plate
-            linear_extrude(thick_plate_t, center=true) rect([width, frame_width], rounding = default_fillet);
-            // slot through-holes
-            yflip_copy() back(vslot_distance/2) cyl(d = M4_through_hole_d, h = thick_plate_t + 2*epsilon, anchor=CENTER);
+            union() {
+              // plate
+              linear_extrude(thick_plate_t, center=true) rect([width, frame_width], rounding = default_fillet);
+              // vslot tongue
+              yflip_copy() recolor("red") back(vslot_distance/2) down(thick_plate_t/2) vslot_tongue(offset=0.4, anchor=BOTTOM, orient=BOTTOM, spin=90);
+            }
+          
+            yflip_copy() back(vslot_distance/2) {
+              // vslot tap holes
+              cyl(d = M4_tap_hole_d, h = thick_plate_t+40 + 2*epsilon, anchor=CENTER);
+              // vslot counterbore holes
+              up(thick_plate_t/2+epsilon) cyl(d = M4_head_d, h = M4_head_d + 2*epsilon, anchor=TOP);
+            }
             // power supply through-slot
             linear_extrude(thick_plate_t+2*epsilon, center=true) rect([M3_through_hole_d, slot_total_length], rounding = M3_through_hole_d/2);
             // part number
@@ -120,17 +121,18 @@ module basic_mounting_plate(width=10, slot_length=90,slot_d=3, text, center, anc
 }
 
 // M3 slotted mounting bracket
-module part_23269BBA03(center, spin=0) {
-        tag("23269BBA03") recolor("YellowGreen") 
-        basic_mounting_plate(
-          slot_length=hole_center_s+M3_through_hole_d, 
-          slot_d =M3_through_hole_d,
-          text="P/N 23269BBA03", 
-          anchor="hole_front_bottom", 
-          center=center, 
-          spin=spin
-        )
-        children();
+module part_23269BBA03(center, anchor="hole_front_bottom", spin=0, orient) {
+  tag("23269BBA03") recolor("YellowGreen") 
+  basic_mounting_plate(
+    slot_length=hole_center_s, //+M3_through_hole_d, 
+    slot_d =M3_through_hole_d,
+    text="P/N 23269BBA03", 
+    center=center, 
+    anchor=anchor, 
+    spin=spin,
+    orient=orient
+  )
+  children();
 }
 
 module control_board_assy() {
@@ -147,27 +149,30 @@ module control_board_assy() {
   force_tag("control_board_assy") union() {
     color("LightYellow") translate([0,0,0]) rotate([0,0,0]) 
       import("23329BBA01 MKS Robin Nano V3 Project Box Base.stl");
-    color("YellowGreen") 
+    *color("YellowGreen") 
       import("23329BBA02 MKS Robin Nano V3 Project Box Lid.stl");
-    color("Gray") translate(pcbPos) rotate(90)
+    *color("Gray") translate(pcbPos) rotate(90)
       import("MKS Robin Nano V3.1.stl");
   }
   children();
 }
+//
 
-hide(hide_tags) 
+//*hide(hide_tags) 
 frame()
 // first power supply mounting bracket attached to frame
-attach("front_right_bottom")  right(ps_hole_back_s) part_23269BBA03()
+attach("front_right_bottom")  right(ps_hole_back_s) tag("23269BBA03") part_23269BBA03()
 // power supply attached to first bracket
 attach("slot_front_top") recolor("silver") 
   tag("power_supply") power_supply_model(ps_model, spin=90 , anchor="hole3", orient=UP)
 // second power supply mounting bracket attached to power supply
-attach("hole0") left(ps_hole_back_s) part_23269BBA03(spin=-90);
+attach("hole0") part_23269BBA03(anchor="slot_front_top", orient=DOWN, spin=90);
 
-hide(hide_tags) translate([-70, 45, -10]) rotate([180,0,-90]) control_board_assy();
+*hide(hide_tags) translate([-70, 45, -10]) rotate([180,0,-90])  control_board_assy();
+
 
 // TESTS
-//part_23269BBA03(center=true) show_anchors();
-//control_board_assy();
-
+//part_23269BBA03(center=true); // show_anchors();
+//control_board_assy
+//
+tag("power_supply") power_supply_model(ps_model, spin=90, anchor="hole3", orient=UP)
