@@ -1,0 +1,8 @@
+Using a 16 x 5mm bearing, and a course sharpening stone,
+Took about 4 hours by hand. Removed 0.32 mm of material, and probably should have gone a bit further, but I was afraid of destroying the bearing. 
+Using honing oil made it go much faster.
+Next, will try mounting bearing on CNC and using a dremel stone bit to remove it.
+That works!
+Move down 0.01 mm per step: this may be too fine for the stepper, as it tended to do nothing for a few steps then a lot of something. Maybe retrieve steps per mm and go 1 step at a time.
+Both attempts ended up removing about 0.5 mm, which was a shade too much.
+The rough edge actually wasn't a problem, and may have acted like serrations.
